@@ -15,7 +15,7 @@ import io.bloc.android.blocly.ui.adapter.ItemAdapter;
 public class BloclyActivity extends Activity {
 
     private ItemAdapter itemAdapter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
