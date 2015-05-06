@@ -1,6 +1,5 @@
 package io.bloc.android.blocly.ui.activity;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -18,7 +17,7 @@ import io.bloc.android.blocly.ui.adapter.ItemAdapter;
 /**
  * Created by benwong on 2015-05-04.
  */
-public class BloclyActivity extends ActionBar {
+public class BloclyActivity extends ActionBarActivity {
 
     private ItemAdapter itemAdapter;
     private ActionBarDrawerToggle drawerToggle;
