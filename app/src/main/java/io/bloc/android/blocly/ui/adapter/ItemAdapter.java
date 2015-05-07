@@ -113,7 +113,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
 
         @Override
         public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-            Log.e(TAG, "onLoadingFailed: " + failReason.toString() + " for URL: " + imageUri);
+            Log.e(TAG, "onLoadingFailed: " + failReason.toString() + " for URL: " + imageUri, new Exception()  );
+
         }
 
         @Override
@@ -150,10 +151,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
           */
 
 
+
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+
             Log.v(TAG, "Checked changed to: " + isChecked);
         }
+
+
 
          /*
           * Private Methods
