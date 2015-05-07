@@ -10,15 +10,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import io.bloc.android.blocly.R;
+import io.bloc.android.blocly.api.model.RssFeed;
 import io.bloc.android.blocly.ui.adapter.ItemAdapter;
 import io.bloc.android.blocly.ui.adapter.NavigationDrawerAdapter;
 
 /**
  * Created by benwong on 2015-05-04.
  */
-public class BloclyActivity extends ActionBarActivity {
+public class BloclyActivity extends ActionBarActivity implements NavigationDrawerAdapter.NavigationDrawerAdapterDelegate{
 
     private ItemAdapter itemAdapter;
     private ActionBarDrawerToggle drawerToggle;
@@ -49,6 +51,7 @@ public class BloclyActivity extends ActionBarActivity {
 
 
         navigationDrawerAdapter = new NavigationDrawerAdapter();
+        navigationDrawerAdapter.setDelegate(this);
         RecyclerView navigationRecyclerView = (RecyclerView) findViewById(R.id.rv_nav_activity_blocly);
         navigationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         navigationRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -79,6 +82,24 @@ public class BloclyActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+    /*
+     * NavigationDrawerAdapterDelegate
+     */
+
+    @Override
+    public void didSelectNavigationOption(NavigationDrawerAdapter adapter, NavigationDrawerAdapter.NavigationOption navigationOption){
+        drawerLayout.closeDrawers();
+        Toast.makeText(this, "Show the " + navigationOption.name(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void didSelectFeed(NavigationDrawerAdapter adapter, RssFeed rssFeed){
+        drawerLayout.closeDrawers();
+        Toast.makeText(this, "Show RSS items from " + rssFeed.getTitle(), Toast.LENGTH_SHORT).show();
+
+    }
+
 
 
 
