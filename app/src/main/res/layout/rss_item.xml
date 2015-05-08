@@ -7,7 +7,7 @@
 
     android:padding="16dp"
 
-    android:background="@drawable/list_selector">
+    >
 
     <FrameLayout
         android:id="@+id/fl_rss_item_image_header"
