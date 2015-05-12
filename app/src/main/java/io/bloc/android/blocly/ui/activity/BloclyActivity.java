@@ -4,8 +4,8 @@ import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +27,7 @@ import io.bloc.android.blocly.ui.adapter.NavigationDrawerAdapter;
 /**
  * Created by benwong on 2015-05-04.
  */
-public class BloclyActivity extends ActionBarActivity
+public class BloclyActivity extends AppCompatActivity
 
         implements
         NavigationDrawerAdapter.NavigationDrawerAdapterDelegate,
@@ -46,11 +46,12 @@ public class BloclyActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_blocly);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_activity_blocly);
         setSupportActionBar(toolbar);
 
-        setContentView(R.layout.activity_blocly);
+
 
         itemAdapter = new ItemAdapter();
         itemAdapter.setDataSource(this);
