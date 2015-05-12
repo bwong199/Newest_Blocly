@@ -69,6 +69,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
 
         RssItem rssItem;
 
+
+
         public ItemAdapterViewHolder(View itemView) {
             super(itemView);
 
