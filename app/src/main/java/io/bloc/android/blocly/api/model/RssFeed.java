@@ -3,7 +3,7 @@ package io.bloc.android.blocly.api.model;
 /**
  * Created by benwong on 2015-05-05.
  */
-public class RssFeed {
+public class RssFeed extends Model{
 
 
     private String title;
@@ -12,7 +12,8 @@ public class RssFeed {
     private String feedUrl;
 
 
-    public RssFeed(String title, String description, String siteUrl, String feedUrl) {
+    public RssFeed(long rowId, String title, String description, String siteUrl, String feedUrl) {
+        super(rowId);
         this.title = title;
         this.description = description;
         this.siteUrl = siteUrl;
