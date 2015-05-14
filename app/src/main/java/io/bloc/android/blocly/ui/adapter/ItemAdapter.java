@@ -105,7 +105,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
             expandedContent.setText(rssItem.getDescription());
             if (rssItem.getImageUrl() != null) {
                 headerWrapper.setVisibility(View.VISIBLE);
-                headerImage.setVisibility(View.INVISIBLE);
+                expandedImage.setVisibility(View.INVISIBLE);
                 ImageLoader.getInstance().loadImage(rssItem.getImageUrl(), this);
             } else {
 
@@ -123,14 +123,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         @Override
         public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
             Log.e(TAG, "onLoadingFailed: " + failReason.toString() + " for URL: " + imageUri);
+            headerImage.setVisibility(View.GONE);
         }
 
         @Override
         public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
 
             if (imageUri.equals(rssItem.getImageUrl())) {
-                headerImage.setImageBitmap(loadedImage);
-                headerImage.setVisibility(View.VISIBLE);
+                expandedImage.setImageBitmap(loadedImage);
+                expandedImage.setVisibility(View.VISIBLE);
             }
         }
 
@@ -149,7 +150,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         public void onClick(View view) {
             if (view == itemView) {
                 animateContent(!contentExpanded);
-                animateContent(!imageExpanded);
+
             } else {
                 Toast.makeText(view.getContext(), "Visit " + rssItem.getUrl(), Toast.LENGTH_SHORT).show();
             }
@@ -217,6 +218,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
                 }
             });
             contentExpanded = expand;
+            imageExpanded = expand;
         }
 
 
