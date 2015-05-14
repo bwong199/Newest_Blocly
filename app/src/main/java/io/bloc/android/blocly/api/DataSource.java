@@ -7,6 +7,9 @@ import io.bloc.android.blocly.BloclyApplication;
 import io.bloc.android.blocly.R;
 import io.bloc.android.blocly.api.model.RssFeed;
 import io.bloc.android.blocly.api.model.RssItem;
+import io.bloc.android.blocly.api.model.database.DatabaseOpenHelper;
+import io.bloc.android.blocly.api.model.database.table.RssFeedTable;
+import io.bloc.android.blocly.api.model.database.table.RssItemTable;
 import io.bloc.android.blocly.api.network.GetFeedsNetworkRequest;
 
 /**
@@ -14,10 +17,24 @@ import io.bloc.android.blocly.api.network.GetFeedsNetworkRequest;
  */
 public class DataSource {
 
+    private DatabaseOpenHelper databaseOpenHelper;
+    private RssFeedTable rssFeedTable;
+    private RssItemTable rssItemTable;
+
     private List<RssFeed> feeds;
     private List<RssItem> items;
 
     public DataSource() {
+        rssFeedTable = new RssFeedTable();
+        rssItemTable = new RssItemTable();
+
+        databaseOpenHelper = new DatabaseOpenHelper(BloclyApplication.getSharedInstance(),
+                rssFeedTable, rssItemTable);
+        feeds = new ArrayList<RssFeed>();
+        items = new ArrayList<RssItem>();
+
+
+
         feeds = new ArrayList<RssFeed>();
         items = new ArrayList<RssItem>();
         createFakeData();
