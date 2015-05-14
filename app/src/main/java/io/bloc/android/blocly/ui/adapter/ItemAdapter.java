@@ -78,7 +78,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
             favoriteCheckbox = (CheckBox) itemView.findViewById(R.id.cb_rss_item_favorite_star);
             expandedContentWrapper = itemView.findViewById(R.id.ll_rss_item_expanded_content_wrapper);
             expandedContent = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_content_full);
-            visitSite = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);
+            visitSite = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_ripple);
 
             itemView.setOnClickListener(this);
             visitSite.setOnClickListener(this);
