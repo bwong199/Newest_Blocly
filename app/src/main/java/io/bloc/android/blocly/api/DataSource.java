@@ -1,9 +1,12 @@
 package io.bloc.android.blocly.api;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import io.bloc.android.blocly.BloclyApplication;
+import io.bloc.android.blocly.BuildConfig;
 import io.bloc.android.blocly.R;
 import io.bloc.android.blocly.api.model.RssFeed;
 import io.bloc.android.blocly.api.model.RssItem;
@@ -42,6 +45,13 @@ public class DataSource {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
+                if (BuildConfig.DEBUG && false){
+                    BloclyApplication.getSharedInstance().deleteDatabase("blocly_db");
+                }
+
+                SQLiteDatabase writableDatabase = databaseOpenHelper.getWritableDatabase();
+
                 new GetFeedsNetworkRequest("http://feeds.feedburner.com/androidcentral?format=xml").performRequest();
             }}).start();
 
