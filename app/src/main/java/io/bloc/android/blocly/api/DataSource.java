@@ -61,6 +61,8 @@ public class DataSource {
 
         final Handler callbackThreadHandler = new Handler();
 
+
+
         submitTask(new Runnable() {
             @Override
             public void run() {
@@ -116,6 +118,8 @@ public class DataSource {
 
 
                 for (GetFeedsNetworkRequest.ItemResponse itemResponse : newFeedResponse.channelItems) {
+
+
 
                     long itemPubDate = System.currentTimeMillis();
                     DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss z", Locale.ENGLISH);
