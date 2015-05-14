@@ -32,6 +32,15 @@
         android:scaleType="centerCrop"/>
 
 
+        <ImageView
+            android:id="@+id/iv_rss_item_expanded_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleType="centerCrop"/>
+
+
+
     </FrameLayout>
 
     <io.bloc.android.blocly.ui.widget.RobotoTextView

@@ -54,6 +54,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
     class ItemAdapterViewHolder extends RecyclerView.ViewHolder implements ImageLoadingListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
         boolean contentExpanded;
+        boolean imageExpanded;
+
 
         TextView title;
         TextView feed;
@@ -65,6 +67,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         CheckBox favoriteCheckbox;
         View expandedContentWrapper;
         TextView expandedContent;
+
+        ImageView expandedImage;
         TextView visitSite;
 
         RssItem rssItem;
@@ -82,6 +86,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
             favoriteCheckbox = (CheckBox) itemView.findViewById(R.id.cb_rss_item_favorite_star);
             expandedContentWrapper = itemView.findViewById(R.id.ll_rss_item_expanded_content_wrapper);
             expandedContent = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_content_full);
+
+            expandedImage = (ImageView) headerWrapper.findViewById(R.id.iv_rss_item_expanded_image);
+
             visitSite = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);
 
             itemView.setOnClickListener(this);
@@ -142,6 +149,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         public void onClick(View view) {
             if (view == itemView) {
                 animateContent(!contentExpanded);
+                animateContent(!imageExpanded);
             } else {
                 Toast.makeText(view.getContext(), "Visit " + rssItem.getUrl(), Toast.LENGTH_SHORT).show();
             }
