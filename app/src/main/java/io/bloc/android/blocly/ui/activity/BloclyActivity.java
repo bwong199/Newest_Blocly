@@ -20,7 +20,7 @@ import io.bloc.android.blocly.ui.adapter.NavigationDrawerAdapter;
 /**
  * Created by benwong on 2015-05-04.
  */
-public class BloclyActivity extends ActionBarActivity implements NavigationDrawerAdapter.NavigationDrawerAdapterDelegate{
+public class BloclyActivity extends ActionBarActivity implements NavigationDrawerAdapter.NavigationDrawerAdapterDelegate, ItemAdapter.itemAdapterDelegate{
 
     private ItemAdapter itemAdapter;
     private ActionBarDrawerToggle drawerToggle;
@@ -52,6 +52,8 @@ public class BloclyActivity extends ActionBarActivity implements NavigationDrawe
 
         navigationDrawerAdapter = new NavigationDrawerAdapter();
         navigationDrawerAdapter.setDelegate(this);
+        itemAdapter.setDelegate(this);
+
         RecyclerView navigationRecyclerView = (RecyclerView) findViewById(R.id.rv_nav_activity_blocly);
         navigationRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         navigationRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -99,6 +101,12 @@ public class BloclyActivity extends ActionBarActivity implements NavigationDrawe
         Toast.makeText(this, "Show RSS items from " + rssFeed.getTitle(), Toast.LENGTH_SHORT).show();
 
     }
+
+    @Override
+    public void displayToast(String string){
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
+    }
+
 
 
 

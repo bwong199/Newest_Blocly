@@ -12,11 +12,12 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.lang.ref.WeakReference;
 
 import io.bloc.android.blocly.BloclyApplication;
 import io.bloc.android.blocly.R;
@@ -28,6 +29,24 @@ import io.bloc.android.blocly.api.model.RssItem;
  * Created by benwong on 2015-05-05.
  */
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterViewHolder> {
+
+    public static interface itemAdapterDelegate {
+        public void displayToast(String string);
+    }
+
+    WeakReference<itemAdapterDelegate> delegate;
+
+    public itemAdapterDelegate getDelegate() {
+        if (delegate == null) {
+            return null;
+        }
+        return delegate.get();
+    }
+
+    public void setDelegate(itemAdapterDelegate delegate) {
+        this.delegate = new WeakReference<itemAdapterDelegate>(delegate);
+    }
+
 
     private static String TAG = ItemAdapter.class.getSimpleName();
 
@@ -83,6 +102,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
             visitSite = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);
 
             itemView.setOnClickListener(this);
+            expandedContentWrapper.setOnClickListener(this);
             visitSite.setOnClickListener(this);
             archiveCheckbox.setOnCheckedChangeListener(this);
             favoriteCheckbox.setOnCheckedChangeListener(this);
@@ -140,19 +160,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         public void onClick(View view) {
             if (view == itemView) {
                 animateContent(!contentExpanded);
+                getDelegate().displayToast("Item expanded");
             } else {
-                Toast.makeText(view.getContext(), "Visit " + rssItem.getUrl(), Toast.LENGTH_SHORT).show();
-            }
+                getDelegate().displayToast("Visit " + rssItem.getUrl());
+            };
+
+
+
         }
+
+
 
         /*
           * OnCheckedChangedListener
           */
 
 
+
+
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
             Log.v(TAG, "Checked changed to: " + isChecked);
+            
         }
 
          /*
