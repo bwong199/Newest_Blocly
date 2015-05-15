@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
@@ -160,9 +161,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         public void onClick(View view) {
             if (view == itemView) {
                 animateContent(!contentExpanded);
-                getDelegate().displayToast("Item expanded");
             } else {
-                getDelegate().displayToast("Visit " + rssItem.getUrl());
+                Toast.makeText(view.getContext(), "User wishes to visit: " + rssItem.getUrl(), Toast.LENGTH_SHORT).show();
             };
 
 
@@ -180,8 +180,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
 
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-            Log.v(TAG, "Checked changed to: " + isChecked);
-            
+
+
+
+            if (compoundButton == archiveCheckbox) {
+                Log.v(TAG, "archiveCheckBox " + isChecked);
+
+            }
+            else {
+                Log.v(TAG, "favoriteCheckbox " + isChecked);
+
+            };
+
+            if (archiveCheckbox.isChecked()) {
+                getDelegate().displayToast("User archives an item");
+            }else if (!archiveCheckbox.isChecked()){
+                getDelegate().displayToast("User unarchives item");
+            };
+
+            if (favoriteCheckbox.isChecked()){
+                getDelegate().displayToast("User favorites item");
+            } else if (!favoriteCheckbox.isChecked()){
+                getDelegate().displayToast("User unfavorites item");
+            };
+
+
         }
 
          /*
@@ -229,8 +252,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
                     if (animatedFraction == 1f) {
                         if (expand) {
                             content.setVisibility(View.GONE);
+                            getDelegate().displayToast("User expands item");
                         } else {
                             expandedContentWrapper.setVisibility(View.GONE);
+                            getDelegate().displayToast("User contracts item");
                         }
                     }
                 }
