@@ -157,7 +157,7 @@ public class BloclyActivity extends AppCompatActivity
             public void onSuccess(List<RssFeed> rssFeeds) {
                 allFeeds.addAll(rssFeeds);
                 navigationDrawerAdapter.notifyDataSetChanged();
-        
+
                 getFragmentManager()
                         .beginTransaction()
                         .add(R.id.fl_activity_blocly, RssItemListFragment.fragmentForRssFeed(rssFeeds.get(0)))
