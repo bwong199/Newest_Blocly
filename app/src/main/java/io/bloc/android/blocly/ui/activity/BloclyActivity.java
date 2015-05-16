@@ -75,12 +75,13 @@ public class BloclyActivity extends AppCompatActivity
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                BloclyApplication.getSharedDataSource().fetchNewFeed("http://feeds.feedburner.com/androidcentral?format=xml",
+//                BloclyApplication.getSharedDataSource().fetchNewFeed("http://feeds.feedburner.com/androidcentral?format=xml",
+                BloclyApplication.getSharedDataSource().fetchNewFeed("http://feeds.ign.com/ign/all?format=xml",
 
                         new DataSource.Callback<RssFeed>() {
                             @Override
                             public void onSuccess(RssFeed rssFeed) {
-                                if(isFinishing() || isDestroyed()){
+                                if (isFinishing() || isDestroyed()) {
                                     return;
                                 }
                                 allFeeds.add(rssFeed);
@@ -109,15 +110,13 @@ public class BloclyActivity extends AppCompatActivity
 
                             @Override
                             public void onError(String errorMessage) {
-                                Toast.makeText(BloclyActivity.this, errorMessage,Toast.LENGTH_LONG).show();
+                                Toast.makeText(BloclyActivity.this, errorMessage, Toast.LENGTH_LONG).show();
 
                                 swipeRefreshLayout.setRefreshing(false);
                             }
                         });
             }
         });
-
-
 
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_activity_blocly);
