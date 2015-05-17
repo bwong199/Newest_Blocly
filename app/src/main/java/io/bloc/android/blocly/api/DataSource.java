@@ -1,6 +1,5 @@
 package io.bloc.android.blocly.api;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
@@ -201,12 +200,12 @@ public class DataSource {
             @Override
             public void run() {
 
-                final RssFeed fetchedFeed;
+
 
                 Cursor existingFeedCursor = RssFeedTable.fetchFeedWithURL(databaseOpenHelper.getReadableDatabase(), feedURL);
                 if (existingFeedCursor.moveToFirst()) {
 
-                    fetchedFeed = feedFromCursor(existingFeedCursor);
+                    final RssFeed fetchedFeed = feedFromCursor(existingFeedCursor);
 
                     existingFeedCursor.close();
 
@@ -239,7 +238,7 @@ public class DataSource {
                     insertResponseToDatabase(newFeedId, itemResponse);
                     Cursor newFeedCursor = rssFeedTable.fetchRow(databaseOpenHelper.getReadableDatabase(), newFeedId);
                     newFeedCursor.moveToFirst();
-                    fetchedFeed = feedFromCursor(newFeedCursor);
+                    final RssFeed fetchedFeed = feedFromCursor(newFeedCursor);
                     newFeedCursor.close();
                     callbackThreadHandler.post(new Runnable() {
                         @Override
