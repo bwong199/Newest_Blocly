@@ -242,6 +242,7 @@ public class BloclyActivity extends ActionBarActivity
             itemAdapter.notifyItemChanged(positionToExpand);
         }
 
+
     }
 
 
