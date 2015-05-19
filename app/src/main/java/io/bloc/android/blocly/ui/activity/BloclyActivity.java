@@ -1,5 +1,6 @@
 package io.bloc.android.blocly.ui.activity;
 
+import android.animation.ValueAnimator;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,6 +45,12 @@ public class BloclyActivity extends AppCompatActivity
     private Menu menu;
     private View overflowButton;
 
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +74,8 @@ public class BloclyActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.dl_activity_blocly);
+
+
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, 0, 0){
 
@@ -259,6 +270,24 @@ public class BloclyActivity extends AppCompatActivity
 
         recyclerView.smoothScrollBy(0, viewToExpand.getTop() - lessToScroll);
 
+    }
+
+    private void animateShareItem(final boolean enabled, View itemView){
+
+        View expandedContentWrapper = itemView.findViewById(R.id.ll_rss_item_expanded_content_wrapper);;
+
+        TextView share = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);;
+
+        if (share.isEnabled() == enabled) {
+            return;
+        }
+        share.setEnabled(enabled);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(enabled ? new int[]{0, 255} : new int[]{255, 0});
+        valueAnimator.setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime));
+        valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+
+        valueAnimator.start();
     }
 
 
