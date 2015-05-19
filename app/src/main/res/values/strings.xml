@@ -6,10 +6,10 @@
     <string name="navigation_option_favorites">Favorites</string>
     <string name="navigation_option_archived">Archived</string>
 
-    <string name="menu_search">"Searching is fun!"</string>
-    <string name="menu_share">"I love to share!"</string>
-    <string name="menu_refresh">"Refresh it up…"</string>
-    <string name="menu_mark_as_read">"Mark 'em all!"</string>
+    <string name="menu_search">"Search"</string>
+    <string name="menu_share">"Share"</string>
+    <string name="menu_refresh">"Refresh"</string>
+    <string name="menu_mark_as_read">"Mark all as read"</string>
 
 
 
