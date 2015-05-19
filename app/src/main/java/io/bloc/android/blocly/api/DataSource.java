@@ -206,6 +206,7 @@ public class DataSource {
                 if (existingFeedCursor.moveToFirst()) {
 
                     final RssFeed fetchedFeed = feedFromCursor(existingFeedCursor);
+
                     existingFeedCursor.close();
 
                     callbackThreadHandler.post(new Runnable() {
