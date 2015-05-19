@@ -37,6 +37,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
     public static interface Delegate {
         public void onItemClicked(ItemAdapter itemAdapter, RssItem rssItem);
         public void onVisitClicked(ItemAdapter itemAdapter, RssItem rssItem);
+        public void onShareClicked(ItemAdapter itemAdapter, RssItem rssItem);
     }
 
     private static String TAG = ItemAdapter.class.getSimpleName();
@@ -139,6 +140,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         TextView expandedContent;
         TextView visitSite;
 
+        TextView shareSite;
+
         RssItem rssItem;
 
         public ItemAdapterViewHolder(View itemView) {
@@ -154,6 +157,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
             expandedContentWrapper = itemView.findViewById(R.id.ll_rss_item_expanded_content_wrapper);
             expandedContent = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_content_full);
             visitSite = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);
+
+            shareSite = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);
 
             itemView.setOnClickListener(this);
             visitSite.setOnClickListener(this);
@@ -213,16 +218,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         @Override
         public void onClick(View view) {
             if (view == itemView) {
-                if (getDelegate() != null){
+                if (getDelegate() != null) {
                     getDelegate().onItemClicked(ItemAdapter.this, rssItem);
                 }
+            } else if (getDelegate() != null) {
+                getDelegate().onVisitClicked(ItemAdapter.this, rssItem);
             } else {
-                if (getDelegate() !=null){
-                    getDelegate().onVisitClicked(ItemAdapter.this, rssItem);
+                if (getDelegate() != null) {
+                    getDelegate().onShareClicked(ItemAdapter.this, rssItem);
                 }
             }
-        }
 
+        }
         /*
           * OnCheckedChangedListener
           */

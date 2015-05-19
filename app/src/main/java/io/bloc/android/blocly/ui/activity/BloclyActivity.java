@@ -295,11 +295,26 @@ public class BloclyActivity extends AppCompatActivity
 
     }
     @Override
-    public void onVisitClicked(ItemAdapter itemAdapter, RssItem rssItem) {
+         public void onVisitClicked(ItemAdapter itemAdapter, RssItem rssItem) {
 
         Intent visitIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(rssItem.getUrl()));
         startActivity(visitIntent);
     }
+
+    @Override
+    public void onShareClicked(ItemAdapter itemAdapter, RssItem rssItem) {
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        startActivity(shareIntent);
+
+        Intent chooser = Intent.createChooser(shareIntent, getString(R.string.share_chooser_title));
+
+        startActivity(chooser);
+
+
+    }
+
+
 
     /*
      * Private methods

@@ -112,6 +112,8 @@
         style="@style/Button"
         android:id="@+id/tv_rss_item_visit_site"
 
+
+
     android:text="visit site"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -120,6 +122,21 @@
     android:paddingTop="8dp"
     android:paddingRight="8dp"
     android:paddingBottom="8dp"/>
+
+        <io.bloc.android.blocly.ui.widget.RobotoTextView
+            style="@style/Button"
+            android:id="@+id/tv_rss_item_share"
+
+
+
+            android:text="share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"/>
 
 </LinearLayout>
 
