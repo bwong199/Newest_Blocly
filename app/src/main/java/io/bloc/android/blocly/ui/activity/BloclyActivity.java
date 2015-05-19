@@ -1,7 +1,10 @@
 package io.bloc.android.blocly.ui.activity;
 
 import android.animation.ValueAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -20,6 +23,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.bloc.android.blocly.BloclyApplication;
 import io.bloc.android.blocly.R;
@@ -201,6 +205,21 @@ public class BloclyActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
 
     }
+
+    public static boolean isIntentAvailable(Context context, String action, Uri uri, String mimeType) {
+        final Intent intent = (uri != null) ? new Intent(action, uri) : new Intent(action);
+        if (mimeType != null) {
+            intent.setType("text/html");
+            intent.setType("text/plain");
+            intent.setType("text/html");
+        }
+        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return !list.isEmpty();
+
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
