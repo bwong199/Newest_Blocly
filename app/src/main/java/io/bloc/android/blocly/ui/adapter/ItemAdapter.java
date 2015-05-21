@@ -150,7 +150,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
         public void onLoadingCancelled(String imageUri, View view) {
 
             ImageLoader.getInstance().loadImage(imageUri, this);
-            }
+        }
 
         /*
           * OnClickListener
@@ -184,28 +184,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
 
 
             if (compoundButton == archiveCheckbox) {
-                Log.v(TAG, "archiveCheckBox " + isChecked);
-
+                if (archiveCheckbox.isChecked()) {
+                    Log.v(TAG, "archiveCheckBox " + isChecked);
+                    getDelegate().displayToast("User archives an item");
+                }
+                else if (!archiveCheckbox.isChecked()){
+                    getDelegate().displayToast("User unarchives an item");
+                }
             }
             else {
-                Log.v(TAG, "favoriteCheckbox " + isChecked);
+                if (favoriteCheckbox.isChecked()) {
+                    Log.v(TAG, "favoriteCheckbox " + isChecked);
+                    getDelegate().displayToast("User favorites item");
+                } else if (!favoriteCheckbox.isChecked()) {
+                    getDelegate().displayToast("User unfavorites item");
+                }
 
-            };
-
-            if (archiveCheckbox.isChecked()) {
-                getDelegate().displayToast("User archives an item");
-            }else if (!archiveCheckbox.isChecked()){
-                getDelegate().displayToast("User unarchives item");
-            };
-
-            if (favoriteCheckbox.isChecked()){
-                getDelegate().displayToast("User favorites item");
-            } else if (!favoriteCheckbox.isChecked()){
-                getDelegate().displayToast("User unfavorites item");
-            };
+            }
 
 
         }
+
+
 
          /*
           * Private Methods
@@ -274,4 +274,4 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemAdapterVie
             valueAnimator.start();
         }
     }
-    }
+}
