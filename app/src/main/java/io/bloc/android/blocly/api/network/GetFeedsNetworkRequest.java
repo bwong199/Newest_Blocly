@@ -29,7 +29,12 @@ public class GetFeedsNetworkRequest extends NetworkRequest {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
                 String line = bufferedReader.readLine();
+                int count = 0;
                 while (line !=null){
+                    if (line.contains("item")){
+                        count++;
+                    }
+                    Log.v(getClass().getSimpleName(), "Item: " + count );
                     Log.v(getClass().getSimpleName(), "Line: " + line);
                     line = bufferedReader.readLine();
                 }
