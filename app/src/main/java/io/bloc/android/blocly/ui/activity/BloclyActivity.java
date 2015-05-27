@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -91,7 +90,10 @@ public class BloclyActivity extends AppCompatActivity
                 }
                 for (int i = 0; i< menu.size(); i++){
                     MenuItem item = menu.getItem(i);
-
+                    if (item.getItemId() == R.id.action_share
+                            && itemAdapter.getExpandedItem() == null) {
+                        continue;
+                    }
                     item.setEnabled(true);
                     Drawable icon = item.getIcon();
                     if (icon != null){
@@ -136,6 +138,10 @@ public class BloclyActivity extends AppCompatActivity
                 }
                 for (int i = 0; i< menu.size(); i++){
                     MenuItem item = menu.getItem(i);
+                    if (item.getItemId() == R.id.action_share
+                            && itemAdapter.getExpandedItem() == null) {
+                        continue;
+                    }
                     Drawable icon = item.getIcon();
                     if (icon != null){
                         icon.setAlpha((int) ((1f - slideOffset) * 255));
@@ -188,6 +194,7 @@ public class BloclyActivity extends AppCompatActivity
 
         getMenuInflater().inflate(R.menu.blocly, menu);
         this.menu = menu;
+        animateShareItem(itemAdapter.getExpandedItem() != null);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -257,7 +264,9 @@ public class BloclyActivity extends AppCompatActivity
         }
         if (positionToExpand > -1){
             itemAdapter.notifyItemChanged(positionToExpand);
+            animateShareItem(true);
         } else{
+            animateShareItem(false);
             return;
         }
 
@@ -272,21 +281,22 @@ public class BloclyActivity extends AppCompatActivity
 
     }
 
-    private void animateShareItem(final boolean enabled, View itemView){
-
-        View expandedContentWrapper = itemView.findViewById(R.id.ll_rss_item_expanded_content_wrapper);;
-
-        TextView share = (TextView) expandedContentWrapper.findViewById(R.id.tv_rss_item_visit_site);;
-
-        if (share.isEnabled() == enabled) {
+    private void animateShareItem(final boolean enabled) {
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        if (shareItem.isEnabled() == enabled) {
             return;
         }
-        share.setEnabled(enabled);
-
+        shareItem.setEnabled(enabled);
+        final Drawable shareIcon = shareItem.getIcon();
         ValueAnimator valueAnimator = ValueAnimator.ofInt(enabled ? new int[]{0, 255} : new int[]{255, 0});
         valueAnimator.setDuration(getResources().getInteger(android.R.integer.config_shortAnimTime));
         valueAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
-
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                shareIcon.setAlpha((Integer) animation.getAnimatedValue());
+            }
+        });
         valueAnimator.start();
     }
 
