@@ -16,6 +16,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +61,18 @@ public class BloclyActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+
+        Intent intentBrowsable = new Intent(Intent.ACTION_VIEW);
+        Intent intentDial = new Intent(Intent.ACTION_DIAL);
+        Intent intentEmail = new Intent(Intent.ACTION_SEND);
+        intentEmail.setType("text/plain");
+
+
+        List<ResolveInfo>activities1 = getPackageManager().queryIntentActivities(intentBrowsable, 0 );
+        List<ResolveInfo>activities2 = getPackageManager().queryIntentActivities(intentDial, 0 );
+        List<ResolveInfo>activities3 = getPackageManager().queryIntentActivities(intentEmail, 0 );
+
+        Log.v("BloclyActivity", "Activities: " + activities1.toString() + activities2.toString() +  activities3.toString());
 
         itemAdapter = new ItemAdapter();
         itemAdapter.setDataSource(this);
